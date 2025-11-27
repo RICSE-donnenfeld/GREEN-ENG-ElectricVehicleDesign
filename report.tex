@@ -13,7 +13,7 @@
 
 \title{\vspace{-1cm}Battery-Electric Vehicle Sizing Exercise\vspace{-0.4cm}}
 \date{}
-\author{Zeinstra M., Donnenfeld T.}
+\author{Ranbawale R., Zeinstra M., Donnenfeld T.}
 
 \begin{document}
 \maketitle
@@ -22,15 +22,14 @@
 
 \section*{0. Assignment Assumptions}
 
-
 \begin{multicols}{3}
 
 \textbf{Vehicle params}
 \begin{itemize}\setlength{\itemsep}{1pt}
-    \item Curb mass: 1800 kg
+    \item Mass: 1800 kg
     \item Wheel diameter: 0.66 m
     \item Aero: $C_d=0.30$, $A=2.35$ m$^2$
-    \item Rolling: $C_{rr}=0.010$
+    \item Rolling Resistance: $C_{rr}=0.010$
     \item Consumption: 17.5 kWh/100 km
 \end{itemize}
 
@@ -61,9 +60,7 @@
 
 \section*{1. Motor and Gearing Selection}
 
-
-A permanent-magnet synchronous motor (PMSM) was chosen for its high torque density and efficiency.  
-\textit{Reference to course PDF:} Section 3 (“Electric Motors for EVs”) states that PMSMs offer the best compromise of torque density, efficiency, and compactness for BEVs, explaining their dominant use in the industry.
+A permanent-magnet synchronous motor (PMSM) was chosen for its high torque density which makes it the standard choice for modern BEVs.
 
 \textbf{Motor specification}
 \begin{itemize}\setlength{\itemsep}{1pt}
@@ -72,8 +69,9 @@ A permanent-magnet synchronous motor (PMSM) was chosen for its high torque densi
     \item Max speed: 13,000 rpm
 \end{itemize}
 
-\textbf{Gearing (single reduction)}  
-\textit{Course reference:} Section 4 (“Powertrain Architecture”) highlights that EVs typically use a single-speed due to wide motor efficiency range.
+\textbf{Gearing}  
+
+Using single gear.
 
 \[
 i = 9.5 : 1
@@ -96,13 +94,11 @@ T_{w,100} = 188 \times 9.5 \times 0.95 = 1693\ \text{Nm}
 \]
 
 
-\section*{2. Battery Pack Sizing}
+\section*{2. Battery Sizing}
 
+NMC 120 Ah was selected due to its higher energy and power density compared to LFP.
 
-NMC 120 Ah was selected due to higher energy density.  
-\textit{Reference to course PDF:} Section 5 (“Battery Cell Technologies”) shows that NMC offers significantly higher gravimetric/volumetric energy density compared with LFP, making it more appropriate for range-sensitive designs.
-
-\textbf{Pack configuration}
+\textbf{Configuration}
 \[
 160s1p
 \]
@@ -110,7 +106,7 @@ NMC 120 Ah was selected due to higher energy density.
 V_{\text{nom}} = 160 \times 3.65 = 584\ \text{V}
 \]
 
-\textbf{Pack energy}
+\textbf{Energy}
 \[
 E_{\text{gross}} = 584 \times 120/1000 = 70.1\ \text{kWh}
 \qquad
@@ -118,7 +114,7 @@ E_{\text{usable}} = 0.95\,E_{\text{gross}} = 66.6\ \text{kWh}
 \]
 
 \textbf{Range estimation}  
-\textit{Reference:} WLTP consumption levels from Section 6 (“Driving Cycles and Energy Consumption”) are used.
+The WLTP-equivalent consumption level used here falls within typical values for compact-to-midsize BEVs.
 
 \[
 \frac{66.6}{17.5}\times 100 = 380\ \text{km}
@@ -126,7 +122,6 @@ E_{\text{usable}} = 0.95\,E_{\text{gross}} = 66.6\ \text{kWh}
 
 
 \section*{3. Performance Verification}
-
 
 \subsection*{Top speed (160 km/h)}
 
@@ -139,7 +134,7 @@ F_{rr} = 177\ \text{N}
 P_m = \frac{(838 + 177)\,44.44}{0.9} \approx 50\ \text{kW}
 \]
 
-\textit{Reference:} Section 7 (“Longitudinal Vehicle Dynamics”) describes the exact drag/rolling model used to determine power vs speed.
+The required power aligns with standard longitudinal vehicle dynamics modeling, where drag dominates at high speed.
 
 \subsection*{Gradeability (6\% @ 100 km/h)}
 \[
@@ -149,15 +144,14 @@ F_d=326,\quad F_{rr}=177,\quad F_g=1060\ \text{N}
 P_m=\frac{1563 \times 27.78}{0.9}=48.2\ \text{kW}
 \]
 
-\textit{Reference:} Grade force $F_g = mg \times \text{grade}$ follows Section 7.3 of the course PDF.
+The grade load follows the usual formulation $F_g = mg \times \text{grade}$.
 
 
 \section*{4. Charging Capability}
 
+The charge window (10--80\%), usable SOC fraction, and current calculation follow standard Li-ion fast-charging conventions.
 
-\textit{Reference:} Section 5.2 (“Charge/Discharge Characteristics”) defines the C-rate convention and the SOC windows used here.
-
-Energy added during 10--80\%:
+Energy added:
 \[
 \Delta E = 0.7 \times 70.1 = 49.1\ \text{kWh}
 \]
@@ -175,13 +169,12 @@ I = \frac{105000}{584} = 180\ \text{A}
 C = 180/120 = 1.5
 \]
 
-Peak charging capability required: 2--2.5C.
+Peak capability required: 2--2.5C.
 
 
 \section*{Conclusion}
 
-
-The selected 150 kW PMSM motor, 9.5:1 single reduction gear, and 70 kWh NMC battery pack meet all design objectives: acceleration, 160 km/h top speed, WLTP-equivalent 380 km range, 6\% gradeability at 100 km/h, and fast-charging 10--80\% in 28 minutes at an average plug power of 117 kW.  
+The selected 150 kW PMSM motor, 9.5:1 single reduction gear, and 70 kWh NMC battery pack meet all design objectives: acceleration, 160 km/h top speed, WLTP-equivalent 380 km range, 6\% gradeability at 100 km/h, and fast-charging 10--80\% in 28 minutes at an average plug power of 117 kW.
 
 \end{document}
 
